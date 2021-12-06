@@ -1,15 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
-import React, { useState } from 'react'
-import Component1 from './Components/Component1';
-import Component2 from './Components/Component2';
-// import Component3 from './Components/Component3';
+import React from 'react'
+import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-export default function App() {
+import BarChart from './components/BarChart'
+import HistoryPage from './components/history/History'
+import './App.css'
+
+Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement);
+
+const App = () => {
   return (
-    <>
-    <Component1 />
-    <Component2 />
-    </>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/dashboard" element={<BarChart />} />
+          <Route path="/history" element={<HistoryPage />} /> 
+        </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
+
+export default App
