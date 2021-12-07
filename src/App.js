@@ -22,7 +22,7 @@ function Content() {
 }
 
 const App = () => {
-  // const [cost_data] = useState([...Content]);
+
   return (
     <main className={styles.container}>
       <div className={styles.wrapper}>
