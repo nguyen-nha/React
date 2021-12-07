@@ -1,12 +1,12 @@
 import React from 'react'
-import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement } from 'chart.js'
+import { Chart, ArcElement, CategoryScale, LinearScale, PointElement, LineElement, BarElement } from 'chart.js'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import BarChart from './components/BarChart'
 import HistoryPage from './components/history/History'
 import './App.css'
 
-Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement);
+Chart.register(ArcElement, CategoryScale, LinearScale, PointElement, LineElement, BarElement);
 
 const App = () => {
   return (
