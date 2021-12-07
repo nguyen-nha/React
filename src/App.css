@@ -9,3 +9,9 @@
 .wrapper {
   width: 550px;
 }
+
+.searchContainer {
+  display: 'flex';
+  align-items: 'center';
+  justify-content: 'center';
+}

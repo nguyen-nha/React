@@ -26,7 +26,7 @@ const Table = ({ data, rowsPerPage }) => {
           {slice.map((el) => (
             <tr className={styles.tableRowItems} key={el.date}>
               <td className={styles.tableCell}>{el.symbol}</td>
-              <td className={styles.tableCell}>{moment(el.date).format('L')}</td>
+              <td className={styles.tableCell}>{el.date}</td>
               <td className={styles.tableCell}>{el.open}</td>
               <td className={styles.tableCell}>{el.close}</td>
               <td className={styles.tableCell}>{el.high}</td>
