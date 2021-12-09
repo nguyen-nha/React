@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   width: 100vw;
@@ -11,7 +11,11 @@
 }
 
 .searchContainer {
-  display: 'flex';
-  align-items: 'center';
-  justify-content: 'center';
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.btn{
+  padding:10px;
 }

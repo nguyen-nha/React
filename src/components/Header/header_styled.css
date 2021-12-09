@@ -1,0 +1,11 @@
+.navbar {
+    display: flex;
+    justify-content: flex-start;
+    box-shadow: 0px -4px 11px 0px #6a7a94;
+    background-color: burlywood;
+}
+
+.navbar_label {
+    font-family: sans-serif;
+    font-size: 36px;
+}
