@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import moment from 'moment'
 import styled from 'styled-components'
 import { useTable, usePagination } from 'react-table'
 
-import MakeData from './makeData'
 
 const Styles = styled.div`
   padding: 1rem;
@@ -177,14 +178,48 @@ function App() {
         },
       ],
       []);
+
+      const [costs, setCost] = useState([]);
+      const [filterCost, setFilterCost] = useState([]);
+      const [keyWord, setKeyWord] = useState('');
+    
+      useEffect(() => {
+          axios.get('http://api.marketstack.com/v1/eod?access_key=66d4f58c4f5a4dadd3c9ab7413861306&symbols=AAPL,FLC.XSTC,PVC.XSTC&limit=1000', {
+            responseType: 'json'
+          })
+          .then((res) => {
+              const cost = res.data.data.map((item) => ({ ...item, date: moment(item.date).format('YYYY-MM-DD') }));
+            
+            setCost(cost);
+            setFilterCost(cost);
+          })
+      }, []);
   
-      const data = MakeData();
-  
+      const handleSearch = () => {
+          let cloneFilterConst = [];
+          if (keyWord) {
+            console.log('keyWord: ', keyWord);
+            cloneFilterConst = costs.filter((cost) => {
+              const filterValue = Object.values(cost).find((value) => value === keyWord);
+              if (filterValue) {
+                return cost;
+              }
+            });
+            setFilterCost(cloneFilterConst);
+          } else {
+            setFilterCost(costs);
+          }
+        } 
+
     return (
       <Styles>
-        <Table columns={columns} data={data} />
+        <div>
+          <input onChange={(event) => setKeyWord(event.target.value)} />
+          <button onClick={handleSearch}>Search</button>
+        </div>
+        <Table columns={columns} data={filterCost} />
       </Styles>
     )
-  }
+}
 
 export default App
