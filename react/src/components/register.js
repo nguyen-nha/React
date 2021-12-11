@@ -63,9 +63,7 @@ export default function SignUp() {
 				password: formData.password,
 			})
 			.then((res) => {
-				history('/login', {replace: true});
-				console.log(res);
-				console.log(res.data);
+				history('/login');
 			});
 	};
 

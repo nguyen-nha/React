@@ -8,13 +8,15 @@ import Header from './components/header';
 import Register from './components/register';
 import Login from './components/login';
 import Logout from './components/logout';
+import History from './components/history_table';
 
 const routing = (
 	<Router>
 		<React.StrictMode>
 			<Header />
 			<Routes>
-				<Route exact path="/welcome" element={<App/>} />
+				<Route exact path="/" element={<App/>} />
+				<Route path="/history" element={<History/>} />
 				<Route path="/register" element={<Register/>} />
 				<Route path="/login" element={<Login/>} />
 				<Route path="/logout" element={<Logout/>} />
