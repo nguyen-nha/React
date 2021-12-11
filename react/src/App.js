@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import Table from './components/table/table'
 import './App.css';
+import axios from 'axios'
 import axiosInstance from './axios';
 
 
@@ -44,7 +45,8 @@ function App() {
       const [keyWord, setKeyWord] = useState('');
     
       useEffect(() => {
-          axiosInstance.get('http://api.marketstack.com/v1/eod?access_key=c4b2cf555fca7235468c503f63711377&symbols=AAPL,FLC.XSTC,PVC.XSTC&limit=1000', {
+        // if (localStorage.getItem('token')) {
+          axios.get('http://api.marketstack.com/v1/eod?access_key=c4b2cf555fca7235468c503f63711377&symbols=AAPL,FLC.XSTC,PVC.XSTC&limit=1000', {
             responseType: 'json'
           })
           .then((res) => {
@@ -53,6 +55,7 @@ function App() {
             setCost(cost);
             setFilterCost(cost);
           })
+        // }
       }, []);
   
       const handleSearch = () => {
