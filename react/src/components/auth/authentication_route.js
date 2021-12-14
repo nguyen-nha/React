@@ -52,9 +52,9 @@ const AuthenticationRoute = (props) => {
       <Route
         path="/register"
         element={
-          <PrivateRoute>
+          // <PrivateRoute>
             <Register />
-          </PrivateRoute>
+          // </PrivateRoute>
         }
       />
       <Route

@@ -12,9 +12,9 @@ const BarChart = (props) => {
     const cloneChartState = { ...chartState };
     const cloneBarState = { ...barState };
     const response = await axios.get(
-      "http://api.marketstack.com/v1/eod?access_key=cc1aed4c64abf93129671d4e4b901948&symbols=FLC"
+      "http://api.marketstack.com/v1/eod?access_key=9a59b0433afbaa3f0adfe7a26c239129&symbols=FLC.XSTC"
     );
-    console.log("response: ", response);
+    // console.log("response: ", response);
     if (response?.data?.data?.length > 5) {
       const chartData = response?.data?.data;
       chartData.slice(0, 10).forEach((item) => {
@@ -31,10 +31,12 @@ const BarChart = (props) => {
     fetchChartData();
   }, []);
 
+  console.log();
   return (
     <>
+    <div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Link to="/history">
+        <Link to="/bar-chart">
           <Line
 						width={600}
 						height={400}
@@ -65,7 +67,8 @@ const BarChart = (props) => {
             }}
           />
         </Link>
-				<div style={{marginLeft: 50}}>hello</div>
+      </div>
+      <div style={{textAlign: 'center'}}>hello</div>
       </div>
       <div style={{ display: 'flex', marginTop: 40, alignItems: 'center' }}>
         <Link to="/history">
@@ -97,7 +100,7 @@ const BarChart = (props) => {
             }}
           />
         </Link>
-				<div style={{marginLeft: 50}}>hello</div>
+				{/* <div style={{marginLeft: 50}}>hello</div> */}
       </div>
     </>
   );

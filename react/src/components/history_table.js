@@ -40,10 +40,11 @@ function History() {
 
       const [costs, setCost] = useState([]);
       const [filterCost, setFilterCost] = useState([]);
-      const [keyWord, setKeyWord] = useState('');
+      const [keyWord, setKeyWord] = useState('AAPL');
+      const [btn, setBtn] = useState(0)
     
       useEffect(() => {
-          axios.get('http://api.marketstack.com/v1/eod?access_key=c4b2cf555fca7235468c503f63711377&symbols=AAPL,FLC.XSTC,PVC.XSTC&limit=1000', {
+          axios.get('http://api.marketstack.com/v1/eod?access_key=9a59b0433afbaa3f0adfe7a26c239129&limit=1000&symbols=' + keyWord, {
             responseType: 'json'
           })
           .then((res) => {
@@ -52,23 +53,17 @@ function History() {
             setCost(cost);
             setFilterCost(cost);
           })
-      }, []);
+      }, [btn]);
   
       const handleSearch = () => {
-          let cloneFilterConst = [];
-          if (keyWord) {
-            console.log('keyWord: ', keyWord);
-            cloneFilterConst = costs.filter((cost) => {
-              const filterValue = Object.values(cost).find((value) => value === keyWord);
-              if (filterValue) {
-                return cost;
-              }
-            });
-            setFilterCost(cloneFilterConst);
-          } else {
-            setFilterCost(costs);
-          }
-        } 
+        if (keyWord) {
+          console.log('keyWord: ', keyWord);
+          setKeyWord(keyWord)
+          setBtn(btn + 1)
+        } else {
+          setFilterCost(costs);
+        }
+      }
 
     return (
       <>
