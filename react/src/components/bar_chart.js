@@ -6,7 +6,16 @@ import axios from "axios";
 import momment from "moment";
 
 const styles = {
-  
+  list: {
+    fontSize: 20,
+    color: '#ede6e6',
+    backgroundColor: '#9fb3d4',
+    display: 'flex-start',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 40,
+  }
 }
 const BarChart = (props) => {
   const [chartState, setChartState] = useState({ label: [], data: [] });
@@ -73,7 +82,7 @@ const BarChart = (props) => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Link to="/history">
           <Line
-						width={600}
+						width={1000}
 						height={400}
             data={{
               labels: chartState?.label,
@@ -103,8 +112,8 @@ const BarChart = (props) => {
           />
         </Link>
         <div>
-          <ul>
-            Thông tin công ty:
+          <ul style={ styles.list }>
+            <b>Thông tin công ty:</b>
             {detail.map(el => (
               <>
               <li>Tên công ty: {el.company_name}</li>
@@ -121,7 +130,7 @@ const BarChart = (props) => {
       <div style={{ display: 'flex', marginTop: 40, alignItems: 'center' }}>
         <Link to="/history">
           <Bar
-						width={600}
+						width={1000}
 						height={400}
             data={{
               labels: barState?.label,
