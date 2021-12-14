@@ -5,14 +5,36 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import momment from "moment";
 
+const styles = {
+  
+}
 const BarChart = (props) => {
   const [chartState, setChartState] = useState({ label: [], data: [] });
   const [barState, setBarState] = useState({ label: [], data: [] });
+  const [keyword, setKeyword] = useState('AAPL')
+  const [detail, setDetail] = useState([{
+    "company_name": "Apple INC",
+    "type": "Điện tử",
+    "symbol": "AAPL",
+    "description": "Công ty điện thoại hàng đầu thế giới"
+  }])
+
+  useEffect(() => {
+    axios.get('http://localhost:8000/api/detail/detail/?keyword=' + keyword, {
+      responseType: 'json'
+    })
+    .then((res) => {
+      
+      setDetail(res.data);
+    })
+}, [keyword]);
+
   const fetchChartData = async () => {
     const cloneChartState = { ...chartState };
     const cloneBarState = { ...barState };
+  
     const response = await axios.get(
-      "http://api.marketstack.com/v1/eod?access_key=9a59b0433afbaa3f0adfe7a26c239129&symbols=FLC.XSTC"
+      "http://api.marketstack.com/v1/eod?access_key=9a59b0433afbaa3f0adfe7a26c239129&symbols=" + keyword
     );
     // console.log("response: ", response);
     if (response?.data?.data?.length > 5) {
@@ -29,14 +51,27 @@ const BarChart = (props) => {
   };
   useEffect(() => {
     fetchChartData();
-  }, []);
-
-  console.log();
+  }, [keyword]);
+  const onChange = (event) => {
+    setKeyword(
+      [event.target.name]= event.target.value
+    )
+    
+  }
+  console.log(keyword);
   return (
     <>
     <div>
+     <div>
+        <select className="browser-default" name="code" onChange={ onChange }>
+          <option value="" disabled selected>Choose Symbol</option> 
+          <option value="AAPL">AAPL</option>
+          <option value='FLC.XSTC'>FLC</option>
+          <option value="PVC.XSTC">PVC</option>
+        </select>
+      </div>
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Link to="/bar-chart">
+        <Link to="/history">
           <Line
 						width={600}
 						height={400}
@@ -67,8 +102,21 @@ const BarChart = (props) => {
             }}
           />
         </Link>
+        <div>
+          <ul>
+            Thông tin công ty:
+            {detail.map(el => (
+              <>
+              <li>Tên công ty: {el.company_name}</li>
+              <li>Ngành: {el.type}</li>
+              <li>Mã cổ phiếu: {el.symbol}</li>
+              <li>Mô tả: {el.description}</li>
+              </>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div style={{textAlign: 'center'}}>hello</div>
+      {/* <div style={{textAlign: 'center'}}>hello</div> */}
       </div>
       <div style={{ display: 'flex', marginTop: 40, alignItems: 'center' }}>
         <Link to="/history">

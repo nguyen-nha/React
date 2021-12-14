@@ -2,6 +2,8 @@
     border-collapse: collapse;
     border: none;
     width: 100%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
 .tableRowHeader {
@@ -39,4 +41,9 @@ background-color: #f9f9f9;
 padding: 12px;
 font-size: 14px;
 color: grey;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
 }

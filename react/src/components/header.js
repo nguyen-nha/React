@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 const useStyles = makeStyles((theme) => ({
 	appBar: {
 		borderBottom: `1px solid ${theme.palette.divider}`,
+		marginBottom: `1%`,
 	},
 	link: {
 		margin: theme.spacing(1, 1.5),
